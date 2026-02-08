@@ -40,7 +40,7 @@ so I could see if some constructs (`.*`, `a*b*`) worked in my Go port.
 ## Building and running
 
 ```
-$ git clone blah blah
+$ git clone https://github.com/bediger4000/simpleregex.git
 $ cd simpleregex
 $ make test
 ...
