@@ -36,7 +36,36 @@ In this case I decided to use Go instead of C.
 I also ended up cut-n-pasting the C code into it's own [file](matching.go),
 so I could see if some constructs (`.*`, `a*b*`) worked in my Go port.
 
+## Building and running
+
+```
+$ git clone blah blah
+$ cd simpleregex
+$ make test
+...
+    --- PASS: Test_match/Kleene_closure_of_dot_metacharacter_ending_regex_3 (0.00s)
+PASS
+ok      simpleregex     (cached)
+$ make all
+```
+
 ## Porting to Go
 
-- Lots of C idioms
-- Go testing
+Sometimes C code can easily transliterate to Go and vice versa,
+but this is not one of them.
+Pike's code uses lots of C idioms, like `== '\0'` for end-of-string,
+and `*text++`, which even the best of us have to think hard about.
+It also uses 2 do-while loops, which are harder in Go.
+
+## Go Unit Testing
+
+I wrote Go unit testing that works with `go test`.
+This uncovered a bug in the Go, `.*` did not work,
+and two Kleene closures in a row failed (`ab*c*d` would not match `abbbccccd`).
+Part of the problem involved the transliteration of a do-while loop
+condition involving `*text++`.
+I had a traditional for-loop with an index variable, and I "advanced"
+the text to be matched via `text = text[1:]`.
+The interaction was incorrect.
+
+Unit testing of each function does not make sense, they're mutually recursive.
