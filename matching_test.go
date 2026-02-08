@@ -212,16 +212,38 @@ func Test_match(t *testing.T) {
 			},
 			want: true,
 		},
-		/* out of scope of this matcher
 		{
-			name: "Kleene closure of dot metacharacter starting regex 3",
+			name: "Kleene closure of dot metacharacter starting regex",
 			args: args{
 				regexp: []rune(".*bc"),
 				text:   []rune("aAxyzbc"),
 			},
 			want: true,
 		},
-		*/
+		{
+			name: "Kleene closure of dot metacharacter ending regex 1",
+			args: args{
+				regexp: []rune("abc.*"),
+				text:   []rune("abcABC"),
+			},
+			want: true,
+		},
+		{
+			name: "Kleene closure of dot metacharacter ending regex 2",
+			args: args{
+				regexp: []rune("abc.*"),
+				text:   []rune("abcabc"),
+			},
+			want: true,
+		},
+		{
+			name: "Kleene closure of dot metacharacter ending regex 3",
+			args: args{
+				regexp: []rune("abc.*"),
+				text:   []rune("abc"),
+			},
+			want: true,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
