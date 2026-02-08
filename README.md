@@ -1,4 +1,4 @@
-# Rob Pike's Regular Expression Matching
+# Rob Pike's Regular Expression Matching, From C to Go
 
 I came across an [article](https://www.cs.princeton.edu/courses/archive/spr09/cos333/beautiful.html)
 by [Brian Kernighan](https://www.cs.princeton.edu/~bwk/),
@@ -24,7 +24,8 @@ All this in only about 30 lines of C language code.
 It's really not missing much in terms of plain old text matching,
 only needing character ranges (like `[a-z]`) and alternation (like `abc|defg`).
 
-I had read the book, and seen the article back in the good old days.
+I had read _The Practice of Programming_ book,
+and seen the article back in the good old days.
 Discovering Kernighan's article compelled me to try the code,
 because I firmly believe you have to do something to understand that thing.
 
@@ -32,7 +33,7 @@ In the case of source code and computer stuff,
 I will re-type what appears on-line, so that I can understand it on a line-by-line basis.
 I often do minor modifications to ensure I'm really understanding and not fooling myself,
 maybe using SQLite instead of MySQL, or adding an operation.
-In this case I decided to use Go instead of C.
+Time time, I decided to use Go instead of C.
 I also ended up cut-n-pasting the C code into it's own [file](matching.go),
 so I could see if some constructs (`.*`, `a*b*`) worked in my Go port.
 
@@ -60,7 +61,7 @@ It also uses 2 do-while loops, which are harder in Go.
 ## Go Unit Testing
 
 I wrote Go unit testing that works with `go test`.
-This uncovered a bug in the Go, `.*` did not work,
+This uncovered a bug in my first cut at a Go version, `.*` did not work,
 and two Kleene closures in a row failed (`ab*c*d` would not match `abbbccccd`).
 Part of the problem involved the transliteration of a do-while loop
 condition involving `*text++`.
