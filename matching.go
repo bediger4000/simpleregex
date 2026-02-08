@@ -40,7 +40,7 @@ func matchstar(c rune, regexp []rune, text []rune) bool {
 	if matchhere(regexp, text) {
 		return true
 	}
-	for i := 0; len(text) > 0 && (text[i] == c || c == '.'); i++ {
+	for len(text) > 0 && (text[0] == c || c == '.') {
 		text = text[1:]
 		if matchhere(regexp, text) {
 			return true
