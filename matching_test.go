@@ -133,6 +133,14 @@ func Test_match(t *testing.T) {
 			want: true,
 		},
 		{
+			name: "Kleene closure starting regex 4",
+			args: args{
+				regexp: []rune("^a*bc"),
+				text:   []rune("bcABC"),
+			},
+			want: true,
+		},
+		{
 			name: "Kleene closure middle of regex 1",
 			args: args{
 				regexp: []rune("ab*c"),
@@ -149,7 +157,7 @@ func Test_match(t *testing.T) {
 			want: true,
 		},
 		{
-			name: "Kleene closure middle of regex 2",
+			name: "Kleene closure middle of regex 3",
 			args: args{
 				regexp: []rune("ab*c"),
 				text:   []rune("abbbbbbc"),
